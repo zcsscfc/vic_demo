@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>e578bbc9-6c81-4b93-95eb-553858f534fa</ProjectGuid>
+    <ProjectGuid>{26625112-EEA0-4033-914F-6BD4C481AC1F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EnumDemo</RootNamespace>
