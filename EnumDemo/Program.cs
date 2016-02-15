@@ -11,6 +11,7 @@ namespace EnumDemo
         static void Main(string[] args)
         {
             Permissions per = Permissions.Delete | Permissions.Insert;
+            Console.WriteLine(per.HasFlag(Permissions.Delete));
             Console.WriteLine(per.HasFlag(Permissions.Query));
             Console.WriteLine(per.HasFlag(Permissions.Insert));
             Console.WriteLine(per == Permissions.Delete);
