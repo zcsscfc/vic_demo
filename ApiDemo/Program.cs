@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
+using ApiDemo.Listener;
 
 namespace ApiDemo
 {
@@ -11,24 +12,13 @@ namespace ApiDemo
     {
         static void Main(string[] args)
         {
-            HttpListener listener = new HttpListener();
-            listener.Prefixes.Add("http://localhost:1337/");
-            listener.Start();
+            //listener.Prefixes.Add("http://localhost:1337/");
+            //listener.Start();
 
-            HttpListenerContext context = listener.GetContext();
-            HttpListenerRequest request = context.Request;
-            HttpListenerResponse response = context.Response;
+            SelfHttpListener listener = new SelfHttpListener();
+            listener.Start("http://localhost:1337/");
 
-            string strResponse = string.Format("<HTML><BODY> {0}</BODY></HTML>", DateTime.Now);
-            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(strResponse);
-            //对客户端输出相应信息.
-            response.ContentLength64 = buffer.Length;
-            System.IO.Stream output = response.OutputStream;
-            output.Write(buffer, 0, buffer.Length);
-            //关闭输出流，释放相应资源
-            output.Close();
 
-            listener.Stop();
 
             Console.ReadKey();
         }
