@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
-using ApiDemo.Listener;
-
+using ApiFramework;
 namespace ApiDemo
 {
     class Program
@@ -13,7 +12,9 @@ namespace ApiDemo
         static void Main(string[] args)
         {
             SelfHttpListener listener = new SelfHttpListener();
-            listener.Start("http://localhost:1337/");
+            string urlBase = "http://localhost:1337/";
+            listener.Start(urlBase);
+            Console.WriteLine(string.Format("listener started on {0}", urlBase));
             Console.ReadKey();
         }
     }
