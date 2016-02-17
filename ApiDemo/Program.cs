@@ -12,14 +12,8 @@ namespace ApiDemo
     {
         static void Main(string[] args)
         {
-            //listener.Prefixes.Add("http://localhost:1337/");
-            //listener.Start();
-
             SelfHttpListener listener = new SelfHttpListener();
             listener.Start("http://localhost:1337/");
-
-
-
             Console.ReadKey();
         }
     }
