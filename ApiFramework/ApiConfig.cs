@@ -8,7 +8,7 @@ namespace ApiFramework
 {
     public class ApiConfig
     {
-        protected SelfHttpListenerBase HttpListener { get; protected set; }
+        protected SelfHttpListenerBase HttpListener { get; private set; }
         protected Dictionary<string, RestHandler> Handlers { get; private set; }
 
         protected void RegisterHanders()
