@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,10 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiConfig.cs" />
+    <Compile Include="AppHostHttpListenerBase.cs" />
     <Compile Include="HttpMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestPathAttribute.cs" />
     <Compile Include="RestControllerAttribute.cs" />
+    <Compile Include="RestHandler.cs" />
     <Compile Include="SelfHttpListener.cs" />
     <Compile Include="SelfHttpListenerBase.cs" />
   </ItemGroup>

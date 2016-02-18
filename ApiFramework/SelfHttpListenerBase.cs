@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,6 +20,12 @@ namespace ApiFramework
         {
             this.startTime = DateTime.UtcNow;
             Init();
+        }
+
+        protected SelfHttpListenerBase(params Assembly[] assembliesWithServices)
+            : this()
+        {
+            
         }
 
         public void Init()
