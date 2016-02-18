@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="3f37647f-88fb-40f6-8293-ba1c5a766881" name="ApiClassDiagram" linkedPackageId="966cc196-e0ab-464f-beb3-9169e46f5ae8" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="241dc9f2-84fe-48a2-80aa-64322657d5c5">
+      <profileInstance Id="97e613c3-7f80-4bef-a455-04aa9d688c35" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="b7644127-46ef-4a9d-8d84-2c983b2282c1">
+      <profileInstance Id="9722b674-f0d4-4ba8-acee-3b4ea5b1b798" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="c445e576-3f9a-41ec-b1d2-8d38596fa9ea" name="SelfHttpListenerBase" isAbstract="true" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="ca0cefd7-1d9c-4f8a-be36-2920e6a44fa8" />
+        <ownedOperationsInternal>
+          <operation Id="a582e621-391e-410b-8ede-3bb247e5799a" name="Init" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f465e384-733b-4ad1-ba46-d8eb327fce32" />
+          </operation>
+          <operation Id="ea389c48-b63b-414a-960c-50141c6e3df2" name="Start" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="05699211-806e-4d36-950f-3584627e6a01" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="79f61b6b-73d5-4f22-b577-bb46a6091ec5" name="urlBase" direction="In">
+                  <elementDefinition Id="4d8e038b-8bfd-41cf-bb10-270d0182a59e" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="ae7f6233-3359-4130-89c5-52bdf9cfd44e" LastKnownName="String" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="17d7e8a1-b4dd-422f-b48f-dfcdd30ff77f" name="Stop" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="02d1ed4e-066d-4558-a786-10a535035736" />
+          </operation>
+          <operation Id="51904e2c-b1c4-49f9-ab85-3d3f16db77a3" name="ProcessRequest" visibility="Protected" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a463130b-df36-40ae-8174-f51b3b4578cc" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="f367e299-69e9-4727-80d3-adb29ac0424c" name="context" direction="In">
+                  <elementDefinition Id="96062b34-f329-43b1-b587-2624cef62db1" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="884438d8-2375-42f6-a3ed-176ecf30f19c" LastKnownName="HttpListenerContext" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="ae7f6233-3359-4130-89c5-52bdf9cfd44e" name="String" isAbstract="false" isLeaf="false" cachedFullName="String">
+        <elementDefinition Id="59259974-6d55-42c6-b7bd-763d77ac8ef9" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="22a33a3d-4fc9-43e2-920e-9ae658dc6904" name="SelfHttpListener" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="75fad6dc-5acb-4e54-a14f-88277a1615e6" />
+        <generalsInternal>
+          <generalization Id="78ea6a1d-0a91-412d-bfe6-281581edb6b1" isSubstitutable="false">
+            <classMoniker Id="c445e576-3f9a-41ec-b1d2-8d38596fa9ea" LastKnownName="SelfHttpListenerBase" />
+            <elementDefinition Id="4945ecc7-c08c-4129-b571-4e69aedaa168" />
+          </generalization>
+        </generalsInternal>
+        <ownedOperationsInternal>
+          <operation Id="b078e3e7-499f-4cb1-a220-d2a2613ed9fb" name="ProcessRequest" visibility="Protected" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="992f65c1-922f-4a32-94ac-5091926b6ccc" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="6f1d826e-d2ec-4312-b9e2-a9ca450ffaf3" name="context" direction="In">
+                  <elementDefinition Id="51feac95-a6f3-410a-ac26-67ac347f8b78" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="884438d8-2375-42f6-a3ed-176ecf30f19c" LastKnownName="HttpListenerContext" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="884438d8-2375-42f6-a3ed-176ecf30f19c" name="HttpListenerContext" isAbstract="false" isLeaf="false" cachedFullName="HttpListenerContext">
+        <elementDefinition Id="25bb421e-aa46-4bb2-916e-8b909610bd25" />
+      </referencedType>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="966cc196-e0ab-464f-beb3-9169e46f5ae8" name="ApiModel">
+    <elementDefinition Id="ad8e64ce-94fc-48e0-ae51-ffdcb09bbc2c" />
+  </package>
+</logicalClassDesignerModel>
