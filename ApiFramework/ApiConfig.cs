@@ -11,13 +11,13 @@ namespace ApiFramework
     public class ApiConfig
     {
         protected SelfHttpListenerBase HttpListener { get; private set; }
-        protected Dictionary<string, RequestPath> RequestPathCollection { get; private set; }
+        public Dictionary<string, ApiPath> RequestPathCollection { get; private set; }
 
         public ApiConfig()
         {
-            RequestPathCollection = new Dictionary<string, RequestPath>();
+            RequestPathCollection = new Dictionary<string, ApiPath>();
         }
-        protected void RegisterRequestPath(params Assembly[] assembliesWithServices)
+        public void RegisterRequestPath(params Assembly[] assembliesWithServices)
         {
             if (assembliesWithServices != null)
             {
@@ -46,6 +46,28 @@ namespace ApiFramework
                 }
             }
 
+            MethodInfo[] methods = serviceType.GetMethods();
+            foreach (var method in methods)
+            {
+                RequestPathAttribute mReqAttribute = method.GetCustomAttribute<RequestPathAttribute>();
+                if (mReqAttribute == null)
+                {
+                    continue;
+                }
+               
+                string _path = basePath + mReqAttribute.Path.Trim();
+                ApiPath requestPath = new ApiPath()
+                {
+                    Operation = method.Name,
+                    Path = _path,
+                    ServiceType = serviceType
+                };
+                if (RequestPathCollection.ContainsKey(_path))
+                {
+                    throw new Exception("存在多个RequestPath");
+                }
+                RequestPathCollection.Add(_path, requestPath);
+            }
         }
 
         private List<Type> GetAssemblyTypes(Assembly[] assembliesWithServices)

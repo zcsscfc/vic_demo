@@ -7,13 +7,19 @@ using ApiFramework;
 namespace Controller
 {
     [RestController]
-    [RequestPath(Path="/home")]
+    [RequestPath(Path = "/home")]
     public class HomerController
     {
         [RequestPath(Path = "/index", Method = HttpMethod.Get)]
-        public string Index()
+        public Response Index()
         {
-            return "helloworld";
+            return new Response().Success();
+        }
+
+        [RequestPath(Path = "/about")]
+        public Response About()
+        {
+            return new Response().Success(new { Name="victor"});
         }
     }
 }

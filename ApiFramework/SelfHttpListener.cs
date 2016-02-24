@@ -14,6 +14,9 @@ namespace ApiFramework
 
             HttpListenerRequest request = context.Request;
             HttpListenerResponse response = context.Response;
+        
+           
+            
 
             string strResponse = string.Format("<HTML><BODY> {0}</BODY></HTML>", DateTime.Now);
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(strResponse);
@@ -24,5 +27,6 @@ namespace ApiFramework
             //关闭输出流，释放相应资源
             output.Close();
         }
+
     }
 }

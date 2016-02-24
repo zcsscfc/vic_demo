@@ -13,10 +13,24 @@ namespace ApiFramework
     {
         protected HttpListener Listener;
         protected bool IsStarted = false;
+
         public static SelfHttpListenerBase Instance { get; protected set; }
         private readonly DateTime startTime;
         private readonly AutoResetEvent ListenForNextRequest = new AutoResetEvent(false);
-        protected SelfHttpListenerBase()
+
+        private ApiConfig apiConfig;
+        public ApiConfig Config
+        {
+            get
+            {
+                return this.apiConfig;
+            }
+            private set
+            {
+                apiConfig = value;
+            }
+        }
+        private SelfHttpListenerBase()
         {
             this.startTime = DateTime.UtcNow;
             Init();
@@ -25,7 +39,7 @@ namespace ApiFramework
         protected SelfHttpListenerBase(params Assembly[] assembliesWithServices)
             : this()
         {
-            
+            apiConfig.RegisterRequestPath(assembliesWithServices);
         }
 
         public void Init()
@@ -35,6 +49,7 @@ namespace ApiFramework
                 throw new InvalidOperationException("SelfHttpListener.Instance has already been set");
             }
             Instance = this;
+            apiConfig = new ApiConfig();
         }
 
         private bool IsListening
@@ -56,7 +71,6 @@ namespace ApiFramework
             this.Listener.Prefixes.Add(urlBase);
             this.IsStarted = true;
             this.Listener.Start();
-
             ThreadPool.QueueUserWorkItem(Listen);
         }
 

@@ -5,15 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using ApiFramework;
+using Controller;
 namespace ApiDemo
 {
     class Program
     {
         static void Main(string[] args)
         {
-            SelfHttpListener listener = new SelfHttpListener();
+            AppHost appHost = new AppHost(AssemblyUtility.GetServicesAssemblys());
             string urlBase = "http://localhost:1337/";
-            listener.Start(urlBase);
+            appHost.Start(urlBase);
+
             Console.WriteLine(string.Format("listener started on {0}", urlBase));
             Console.ReadKey();
         }
