@@ -9,6 +9,7 @@ namespace ApiFramework
 {
     public interface IApiResponse
     {
-        Stream OutputStream { get;  set; }
+        string ContentType { get; set; }
+        object Content { get; set; }
     }
 }

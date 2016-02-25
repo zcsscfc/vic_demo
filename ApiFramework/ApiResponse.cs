@@ -9,20 +9,33 @@ namespace ApiFramework
 {
     public class ApiResponse : IApiResponse
     {
-        private Stream outputStream;
-        public ApiResponse(Stream outputStream)
+        private string contentType;
+        private object content;
+        public ApiResponse()
         {
-            this.outputStream = outputStream;
         }
-        public Stream OutputStream
+         public string ContentType
         {
             get
             {
-                return outputStream;
+                return this.contentType;
             }
-             set
+            set
             {
-                this.outputStream = value;
+                this.contentType = value;
+            }
+        }
+
+
+        public object Content
+        {
+            get
+            {
+                return this.content;
+            }
+            set
+            {
+                this.content = value;
             }
         }
     }

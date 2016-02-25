@@ -5,6 +5,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ApiFramework
 {
@@ -21,14 +22,19 @@ namespace ApiFramework
             HttpListenerResponse response = context.Response;
 
 
-            ApiRequest apiRequest = GetApiRequest(request);
+            ApiRequest apiRequest = WrapApiRequest(request);
 
-            ApiResponse apiResponse = WrapApiResponse(response);
+            IApiResponse apiResponse = WrapApiResponse();
 
             IApiHandler handler = GetHandler();
             handler.ProcessRequest(apiRequest, apiResponse);
+            response.ContentType = apiResponse.ContentType;
 
-
+            string json = JsonConvert.SerializeObject(apiResponse.Content);
+            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(json);
+            response.ContentType = apiResponse.ContentType;
+            response.OutputStream.Write(buffer, 0, buffer.Length);
+            response.OutputStream.Close();
         }
 
         private IApiHandler GetHandler()
@@ -36,13 +42,14 @@ namespace ApiFramework
             return new RestHandler { Config = Config };
         }
 
-        private ApiResponse WrapApiResponse(HttpListenerResponse response)
-        {
-            return new ApiResponse(response.OutputStream);
+        private IApiResponse WrapApiResponse()
+        {           
+            return new ApiResponse();
         }
 
-        private ApiRequest GetApiRequest(HttpListenerRequest request)
+        private ApiRequest WrapApiRequest(HttpListenerRequest request)
         {
+           
             string rawUrl = request.RawUrl;
             if (string.IsNullOrWhiteSpace(rawUrl)) return null;
             int index = rawUrl.IndexOf("?");

@@ -34,11 +34,8 @@ namespace ApiFramework
                         var apiInstance = Activator.CreateInstance(apiPath.ServiceType);
                         var method = apiPath.ServiceType.GetMethod(apiPath.Operation);
                         object _response = method.Invoke(apiInstance, null);
-                        string json = JsonConvert.SerializeObject(_response);
-
-                        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(json);
-                        response.OutputStream.Write(buffer, 0, buffer.Length);
-                        response.OutputStream.Close();
+                        response.Content = _response;
+                        response.ContentType = "text/json";
                     }
                 }
             }            
