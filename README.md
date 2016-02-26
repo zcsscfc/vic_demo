@@ -1,3 +1,3 @@
 # vic_demo
 demo
-demo v1.0
+demo dev1.0
