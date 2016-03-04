@@ -54,14 +54,26 @@ namespace ApiFramework
                 {
                     continue;
                 }
-               
+
                 string _path = basePath + mReqAttribute.Path.Trim();
+                ParameterInfo[] paras = method.GetParameters();
+                List<Type> paraTypes = new List<Type>();
+                if (paras != null)
+                {
+                    foreach (ParameterInfo paraInfo in paras)
+                    {
+                        paraTypes.Add(paraInfo.ParameterType);
+                    }
+                }
+
                 ApiPath requestPath = new ApiPath()
                 {
                     Operation = method.Name,
                     Path = _path,
-                    ServiceType = serviceType
+                    ServiceType = serviceType,
+                    Parameters = paraTypes.ToArray()
                 };
+
                 if (RequestPathCollection.ContainsKey(_path))
                 {
                     throw new Exception("存在多个RequestPath");

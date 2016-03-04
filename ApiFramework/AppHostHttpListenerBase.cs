@@ -22,7 +22,7 @@ namespace ApiFramework
             HttpListenerResponse response = context.Response;
 
 
-            ApiRequest apiRequest = WrapApiRequest(request);
+            IApiRequest apiRequest = WrapApiRequest(request);
 
             IApiResponse apiResponse = WrapApiResponse();
 
@@ -43,13 +43,13 @@ namespace ApiFramework
         }
 
         private IApiResponse WrapApiResponse()
-        {           
+        {
             return new ApiResponse();
         }
 
-        private ApiRequest WrapApiRequest(HttpListenerRequest request)
+        private IApiRequest WrapApiRequest(HttpListenerRequest request)
         {
-           
+
             string rawUrl = request.RawUrl;
             if (string.IsNullOrWhiteSpace(rawUrl)) return null;
             int index = rawUrl.IndexOf("?");
@@ -59,8 +59,12 @@ namespace ApiFramework
                 path = rawUrl.Substring(0, index + 1);
             return new ApiRequest
             {
-                Path = path.ToLower()
-            };
+                Path = path.ToLower(),
+                QueryString = request.QueryString,
+                HttpMethod = request.HttpMethod,
+                ContentType=request.ContentType,
+                InputStream=request.InputStream
+            };            
         }
     }
 }

@@ -124,8 +124,9 @@ namespace ApiFramework
             }
             catch (Exception ex)
             {
-                context.Response.StatusCode = 500;
-                context.Response.ContentType = "application/json";
+                context.Response.StatusCode = 500;     
+                byte[]buffer=Encoding.UTF8.GetBytes(ex.Message);
+                context.Response.OutputStream.Write(buffer, 0, buffer.Length);
                 context.Response.OutputStream.Flush();
                 context.Response.Close();
             }

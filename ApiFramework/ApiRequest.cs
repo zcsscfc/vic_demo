@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Specialized;
+using System.IO;
 
 namespace ApiFramework
 {
@@ -12,28 +14,26 @@ namespace ApiFramework
 
 
 
-        public System.Collections.Specialized.NameValueCollection QueryString
+        public NameValueCollection QueryString
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public string HttpMethod
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
+
+
+        public NameValueCollection Headers
+        {
+            get;
+            set;
+        }
+
+        public string ContentType { get; set; }
+        public Stream InputStream { get; set; }
     }
 }
