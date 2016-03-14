@@ -57,6 +57,11 @@ namespace ShawdowSockTool
             }
         }
 
+        static void Test()
+        {
+
+        }
+
         static void PingServer()
         {
             using (StreamReader reader = new StreamReader("guiConfig.json"))
