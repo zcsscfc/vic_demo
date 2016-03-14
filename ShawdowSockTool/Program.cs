@@ -60,6 +60,10 @@ namespace ShawdowSockTool
         static void Test()
         {
             Console.WriteLine("test");
+            Console.WriteLine("test");
+
+            Console.WriteLine("test");
+
         }
 
         static void PingServer()
