@@ -1,30 +1,38 @@
-﻿using System;
-using System.Net;
-using System.Reflection;
+﻿//==============================================================
+//Copyright (C) 2016 Ctrip Corporation.. All rights reserved.
+//Information Contained Herein is Proprietary and Confidential.
+//==============================================================
+//Create by zcs at 2016/3/22 15:24:03.
+//Description:
+//==============================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Web;
 using Newtonsoft.Json;
 
 namespace ApiFramework
 {
-    public class AppHostHttpListenerBase : SelfHttpListenerBase
+    public class WebHttpHandler : IHttpHandler
     {
-        protected AppHostHttpListenerBase(params Assembly[] assembliesWithServices)
-            : base(assembliesWithServices)
+        public bool IsReusable
         {
+            get { return false; }
         }
 
-        protected override void ProcessRequest(HttpListenerContext context)
+        public void ProcessRequest(HttpContext context)
         {
-            var request = context.Request;
-            var response = context.Response;
+            HttpRequest request = context.Request;
+            HttpResponse response = context.Response;
 
+            IApiRequest apiRequest = WrapApiRequest(request);
+            IApiResponse apiResponse = WrapApiResponse(response);
 
-            var apiRequest = WrapApiRequest(request);
-
-            var apiResponse = WrapApiResponse();
-
-            var handler = GetHandler();
-            handler.ProcessRequest(apiRequest, apiResponse);
+            IApiHandler handler = GetHttpHandler();
+            handler.ProcessRequest(apiRequest,apiResponse);
             response.ContentType = apiResponse.ContentType;
 
             var json = JsonConvert.SerializeObject(apiResponse.Content);
@@ -34,17 +42,17 @@ namespace ApiFramework
             response.OutputStream.Close();
         }
 
-        private IApiHandler GetHandler()
+        private IApiHandler GetHttpHandler()
         {
             return new RestHandler();
         }
 
-        private IApiResponse WrapApiResponse()
+        private IApiResponse WrapApiResponse(HttpResponse response)
         {
             return new ApiResponse();
         }
 
-        private static IApiRequest WrapApiRequest(HttpListenerRequest request)
+        private IApiRequest WrapApiRequest(HttpRequest request)
         {
             var rawUrl = request.RawUrl;
             if (string.IsNullOrWhiteSpace(rawUrl)) return null;

@@ -64,6 +64,8 @@
     <Compile Include="RestHandler.cs" />
     <Compile Include="SelfHttpListener.cs" />
     <Compile Include="SelfHttpListenerBase.cs" />
+    <Compile Include="WebHost.cs" />
+    <Compile Include="WebHttpHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

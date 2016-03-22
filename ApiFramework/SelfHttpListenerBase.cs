@@ -43,7 +43,7 @@ namespace ApiFramework
                 throw new InvalidOperationException("SelfHttpListener.Instance has already been set");
             }
             Instance = this;
-            Config = new ApiConfig();
+            Config = ApiConfig.GetInstance();
         }
 
         public virtual void Start(string urlBase)

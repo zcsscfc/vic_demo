@@ -17,6 +17,29 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTest", "ApiTest\ApiTest.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShawdowSockTool", "ShawdowSockTool\ShawdowSockTool.csproj", "{93401374-C081-4DBC-8041-4667D75DBC68}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "webapp", "http://localhost:60391", "{D3926EF6-2618-4384-8B24-0F322A9B9320}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{38a41aa4-4e0c-42a6-bd63-e63edb865c11}|ApiFramework.dll;{6ad969f6-7172-438e-bea4-5fc98bf37692}|Controller.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_60391"
+		Debug.AspNetCompiler.PhysicalPath = "webapp\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_60391\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_60391"
+		Release.AspNetCompiler.PhysicalPath = "webapp\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_60391\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "webapp\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +74,10 @@ Global
 		{93401374-C081-4DBC-8041-4667D75DBC68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93401374-C081-4DBC-8041-4667D75DBC68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93401374-C081-4DBC-8041-4667D75DBC68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3926EF6-2618-4384-8B24-0F322A9B9320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3926EF6-2618-4384-8B24-0F322A9B9320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3926EF6-2618-4384-8B24-0F322A9B9320}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3926EF6-2618-4384-8B24-0F322A9B9320}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

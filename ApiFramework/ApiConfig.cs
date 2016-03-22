@@ -8,9 +8,16 @@ namespace ApiFramework
 {
     public class ApiConfig
     {
-        public ApiConfig()
+        private ApiConfig()
         {
             RequestPathCollection = new Dictionary<string, ApiPath>();
+        }
+
+        private static readonly ApiConfig apiConfig=new ApiConfig();
+
+        public static ApiConfig GetInstance()
+        {
+            return apiConfig;
         }
 
         public Dictionary<string, ApiPath> RequestPathCollection { get; private set; }

@@ -9,13 +9,12 @@ namespace ApiFramework
 {
     public class RestHandler : IApiHandler, IHttpHandler
     {
-        public ApiConfig Config { get; set; }
-
         public void ProcessRequest(IApiRequest request, IApiResponse response)
         {
             if (string.IsNullOrWhiteSpace(request.Path)) return;
             ApiPath apiPath;
-            if (!Config.RequestPathCollection.TryGetValue(request.Path, out apiPath)) return;
+            ApiConfig config = ApiConfig.GetInstance();
+            if (!config.RequestPathCollection.TryGetValue(request.Path, out apiPath)) return;
             if (apiPath == null) return;
             var apiInstance = Activator.CreateInstance(apiPath.ServiceType);
             var method = apiPath.ServiceType.GetMethod(apiPath.Operation);

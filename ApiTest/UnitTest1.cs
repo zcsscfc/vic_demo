@@ -9,7 +9,7 @@ namespace ApiTest
         [TestMethod]
         public void TestMethod1()
         {
-            string s = "hello world";
+            var s = "hello world";
         }
     }
 }
