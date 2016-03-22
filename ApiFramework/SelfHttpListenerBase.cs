@@ -1,45 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace ApiFramework
 {
     public abstract class SelfHttpListenerBase
     {
-        protected HttpListener Listener;
-        protected bool IsStarted = false;
-
-        public static SelfHttpListenerBase Instance { get; protected set; }
-        private readonly DateTime _startTime;
         private readonly AutoResetEvent _listenForNextRequest = new AutoResetEvent(false);
+        private readonly DateTime _startTime;
 
-        private ApiConfig _apiConfig;
-        public ApiConfig Config
-        {
-            get
-            {
-                return this._apiConfig;
-            }
-            private set
-            {
-                _apiConfig = value;
-            }
-        }
+        private bool _disposed;
+        protected bool IsStarted;
+        protected HttpListener Listener;
+
         private SelfHttpListenerBase()
         {
-            this._startTime = DateTime.UtcNow;
+            _startTime = DateTime.UtcNow;
             Init();
         }
 
         protected SelfHttpListenerBase(params Assembly[] assembliesWithServices)
             : this()
         {
-            _apiConfig.RegisterRequestPath(assembliesWithServices);
+            Config.RegisterRequestPath(assembliesWithServices);
+        }
+
+        public static SelfHttpListenerBase Instance { get; protected set; }
+
+        public ApiConfig Config { get; private set; }
+
+        private bool IsListening
+        {
+            get { return IsStarted && Listener != null && Listener.IsListening; }
         }
 
         public void Init()
@@ -49,47 +43,43 @@ namespace ApiFramework
                 throw new InvalidOperationException("SelfHttpListener.Instance has already been set");
             }
             Instance = this;
-            _apiConfig = new ApiConfig();
+            Config = new ApiConfig();
         }
 
-        private bool IsListening
-        {
-            get { return this.IsStarted && this.Listener != null && this.Listener.IsListening; }
-        }
         public virtual void Start(string urlBase)
         {
-            if (this.IsStarted)
+            if (IsStarted)
             {
                 return;
             }
 
-            if (this.Listener == null)
+            if (Listener == null)
             {
-                this.Listener = new HttpListener();
+                Listener = new HttpListener();
             }
 
-            this.Listener.Prefixes.Add(urlBase);
-            this.IsStarted = true;
-            this.Listener.Start();
+            Listener.Prefixes.Add(urlBase);
+            IsStarted = true;
+            Listener.Start();
             ThreadPool.QueueUserWorkItem(Listen);
         }
 
         private void Listen(object state)
         {
-            while (this.IsListening)
+            while (IsListening)
             {
-                if (this.Listener == null) return;
+                if (Listener == null) return;
 
                 try
                 {
-                    this.Listener.BeginGetContext(ListenerCallBack, this.Listener);
+                    Listener.BeginGetContext(ListenerCallBack, Listener);
                     _listenForNextRequest.WaitOne();
                 }
                 catch (Exception ex)
                 {
                     return;
                 }
-                if (this.Listener == null) return;
+                if (Listener == null) return;
             }
         }
 
@@ -116,16 +106,14 @@ namespace ApiFramework
                 _listenForNextRequest.Set();
             }
 
-            if (context == null) return;
-
             try
             {
-                this.ProcessRequest(context);
+                ProcessRequest(context);
             }
             catch (Exception ex)
             {
-                context.Response.StatusCode = 500;     
-                byte[]buffer=Encoding.UTF8.GetBytes(ex.Message);
+                context.Response.StatusCode = 500;
+                var buffer = Encoding.UTF8.GetBytes(ex.Message);
                 context.Response.OutputStream.Write(buffer, 0, buffer.Length);
                 context.Response.OutputStream.Flush();
                 context.Response.Close();
@@ -137,18 +125,16 @@ namespace ApiFramework
             if (Listener == null) return;
             try
             {
-                this.Listener.Close();
+                Listener.Close();
             }
             catch (HttpListenerException ex)
             {
-
             }
-            this.IsStarted = false;
-            this.Listener = null;
+            IsStarted = false;
+            Listener = null;
         }
-        protected abstract void ProcessRequest(HttpListenerContext context);
 
-        private bool _disposed;
+        protected abstract void ProcessRequest(HttpListenerContext context);
 
         protected virtual void Dispose(bool disposing)
         {
@@ -158,12 +144,13 @@ namespace ApiFramework
                 if (_disposed) return;
                 if (disposing)
                 {
-                    this.Stop();
+                    Stop();
                     Instance = null;
                 }
                 _disposed = true;
             }
         }
+
         public void Dispose()
         {
             Dispose(true);

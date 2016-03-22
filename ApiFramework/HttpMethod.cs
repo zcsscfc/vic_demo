@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ApiFramework
+﻿namespace ApiFramework
 {
-    public class HttpMethod
+    public static class HttpMethod
     {
         public const string Post = "POST";
         public const string Get = "GET";

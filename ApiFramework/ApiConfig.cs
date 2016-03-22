@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Reflection;
 using ApiFramework.Extensions;
 
@@ -10,34 +8,28 @@ namespace ApiFramework
 {
     public class ApiConfig
     {
-        protected SelfHttpListenerBase HttpListener { get; private set; }
-        public Dictionary<string, ApiPath> RequestPathCollection { get; private set; }
-
         public ApiConfig()
         {
             RequestPathCollection = new Dictionary<string, ApiPath>();
         }
+
+        public Dictionary<string, ApiPath> RequestPathCollection { get; private set; }
+
         public void RegisterRequestPath(params Assembly[] assembliesWithServices)
         {
-            if (assembliesWithServices != null)
+            if (assembliesWithServices == null) return;
+            var types = GetAssemblyTypes(assembliesWithServices);
+            foreach (var type in types.Where(type => type.HasAttribute<RestControllerAttribute>()))
             {
-                List<Type> types = GetAssemblyTypes(assembliesWithServices);
-                List<Type> serviceTypes = new List<Type>();
-                foreach (var type in types)
-                {
-                    if (type.HasAttribute<RestControllerAttribute>())
-                    {
-                        AnalysisRequestPath(type);
-                    }
-                }
+                AnalysisRequestPath(type);
             }
         }
 
         private void AnalysisRequestPath(Type serviceType)
         {
             if (serviceType == null) return;
-            string basePath = "";
-            RequestPathAttribute reqAttribute = serviceType.GetCustomAttribute<RequestPathAttribute>();
+            var basePath = "";
+            var reqAttribute = serviceType.GetCustomAttribute<RequestPathAttribute>();
             if (reqAttribute != null)
             {
                 if (!string.IsNullOrWhiteSpace(reqAttribute.Path))
@@ -46,59 +38,45 @@ namespace ApiFramework
                 }
             }
 
-            MethodInfo[] methods = serviceType.GetMethods();
+            var methods = serviceType.GetMethods();
             foreach (var method in methods)
             {
-                RequestPathAttribute mReqAttribute = method.GetCustomAttribute<RequestPathAttribute>();
+                var mReqAttribute = method.GetCustomAttribute<RequestPathAttribute>();
                 if (mReqAttribute == null)
                 {
                     continue;
                 }
 
-                string _path = basePath + mReqAttribute.Path.Trim();
-                ParameterInfo[] paras = method.GetParameters();
-                List<Type> paraTypes = new List<Type>();
-                if (paras != null)
-                {
-                    foreach (ParameterInfo paraInfo in paras)
-                    {
-                        paraTypes.Add(paraInfo.ParameterType);
-                    }
-                }
+                var path = basePath + mReqAttribute.Path.Trim();
+                var paras = method.GetParameters();
 
-                ApiPath requestPath = new ApiPath()
+                var requestPath = new ApiPath
                 {
                     Operation = method.Name,
-                    Path = _path,
+                    Path = path,
                     ServiceType = serviceType,
-                    Parameters = paraTypes.ToArray()
+                    Parameters = paras.Select(paraInfo => paraInfo.ParameterType).ToArray()
                 };
 
-                if (RequestPathCollection.ContainsKey(_path))
+                if (RequestPathCollection.ContainsKey(path))
                 {
                     throw new Exception("存在多个RequestPath");
                 }
-                RequestPathCollection.Add(_path, requestPath);
+                RequestPathCollection.Add(path, requestPath);
             }
         }
 
-        private List<Type> GetAssemblyTypes(Assembly[] assembliesWithServices)
+        private static IEnumerable<Type> GetAssemblyTypes(Assembly[] assembliesWithServices)
         {
             var results = new List<Type>();
 
             try
             {
-                foreach (var assembly in assembliesWithServices)
-                {
-                    foreach (var type in assembly.GetTypes())
-                    {
-                        results.Add(type);
-                    }
-                }
+                results.AddRange(assembliesWithServices.SelectMany(assembly => assembly.GetTypes()));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
+                // ignored
             }
             return results;
         }

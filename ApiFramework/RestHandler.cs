@@ -1,19 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Reflection;
-using Newtonsoft.Json;
 using System.IO;
-using System.Collections.Specialized;
+using System.Linq;
+using System.Web;
+using Newtonsoft.Json;
 
 namespace ApiFramework
 {
     public class RestHandler : IApiHandler, IHttpHandler
     {
         public ApiConfig Config { get; set; }
+
+        public void ProcessRequest(IApiRequest request, IApiResponse response)
+        {
+            if (string.IsNullOrWhiteSpace(request.Path)) return;
+            ApiPath apiPath;
+            if (!Config.RequestPathCollection.TryGetValue(request.Path, out apiPath)) return;
+            if (apiPath == null) return;
+            var apiInstance = Activator.CreateInstance(apiPath.ServiceType);
+            var method = apiPath.ServiceType.GetMethod(apiPath.Operation);
+
+            var paraTypes = apiPath.Parameters;
+            List<object> parameters = null;
+            if (paraTypes != null)
+            {
+                parameters = paraTypes.Select(paraType => GetParameter(paraType, request)).ToList();
+            }
+
+            var _response = method.Invoke(apiInstance, parameters == null ? null : parameters.ToArray());
+            if (_response == null) throw new ArgumentNullException("request");
+            response.Content = _response;
+            response.ContentType = "text/json";
+        }
+
         public bool IsReusable
         {
             get { throw new NotImplementedException(); }
@@ -22,37 +41,6 @@ namespace ApiFramework
         public void ProcessRequest(HttpContext context)
         {
             throw new NotImplementedException();
-        }
-
-        public void ProcessRequest(IApiRequest request, IApiResponse response)
-        {
-            if (!string.IsNullOrWhiteSpace(request.Path))
-            {
-                ApiPath apiPath;
-                if (Config.RequestPathCollection.TryGetValue(request.Path, out apiPath))
-                {
-                    if (apiPath != null)
-                    {
-                        var apiInstance = Activator.CreateInstance(apiPath.ServiceType);
-                        var method = apiPath.ServiceType.GetMethod(apiPath.Operation);
-
-                        Type[] paraTypes = apiPath.Parameters;
-                        List<object> parameters = null;
-                        if (paraTypes != null)
-                        {
-                            parameters = new List<object>();
-                            foreach (Type paraType in paraTypes)
-                            {
-                                parameters.Add(GetParameter(paraType, request));
-                            }
-                        }
-
-                        object _response = method.Invoke(apiInstance, parameters == null ? null : parameters.ToArray());
-                        response.Content = _response;
-                        response.ContentType = "text/json";
-                    }
-                }
-            }
         }
 
         private object GetParameter(Type paraType, IApiRequest request)
@@ -64,9 +52,9 @@ namespace ApiFramework
             //{
 
             //}
-            
-            StreamReader reader = new StreamReader(request.InputStream);
-            string body = reader.ReadToEnd();
+
+            var reader = new StreamReader(request.InputStream);
+            var body = reader.ReadToEnd();
 
             if (!string.IsNullOrWhiteSpace(body))
             {
