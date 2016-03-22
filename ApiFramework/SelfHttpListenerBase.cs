@@ -15,31 +15,31 @@ namespace ApiFramework
         protected bool IsStarted = false;
 
         public static SelfHttpListenerBase Instance { get; protected set; }
-        private readonly DateTime startTime;
-        private readonly AutoResetEvent ListenForNextRequest = new AutoResetEvent(false);
+        private readonly DateTime _startTime;
+        private readonly AutoResetEvent _listenForNextRequest = new AutoResetEvent(false);
 
-        private ApiConfig apiConfig;
+        private ApiConfig _apiConfig;
         public ApiConfig Config
         {
             get
             {
-                return this.apiConfig;
+                return this._apiConfig;
             }
             private set
             {
-                apiConfig = value;
+                _apiConfig = value;
             }
         }
         private SelfHttpListenerBase()
         {
-            this.startTime = DateTime.UtcNow;
+            this._startTime = DateTime.UtcNow;
             Init();
         }
 
         protected SelfHttpListenerBase(params Assembly[] assembliesWithServices)
             : this()
         {
-            apiConfig.RegisterRequestPath(assembliesWithServices);
+            _apiConfig.RegisterRequestPath(assembliesWithServices);
         }
 
         public void Init()
@@ -49,7 +49,7 @@ namespace ApiFramework
                 throw new InvalidOperationException("SelfHttpListener.Instance has already been set");
             }
             Instance = this;
-            apiConfig = new ApiConfig();
+            _apiConfig = new ApiConfig();
         }
 
         private bool IsListening
@@ -83,7 +83,7 @@ namespace ApiFramework
                 try
                 {
                     this.Listener.BeginGetContext(ListenerCallBack, this.Listener);
-                    ListenForNextRequest.WaitOne();
+                    _listenForNextRequest.WaitOne();
                 }
                 catch (Exception ex)
                 {
@@ -113,7 +113,7 @@ namespace ApiFramework
             }
             finally
             {
-                ListenForNextRequest.Set();
+                _listenForNextRequest.Set();
             }
 
             if (context == null) return;
@@ -148,20 +148,20 @@ namespace ApiFramework
         }
         protected abstract void ProcessRequest(HttpListenerContext context);
 
-        private bool disposed;
+        private bool _disposed;
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposed) return;
+            if (_disposed) return;
             lock (this)
             {
-                if (disposed) return;
+                if (_disposed) return;
                 if (disposing)
                 {
                     this.Stop();
                     Instance = null;
                 }
-                disposed = true;
+                _disposed = true;
             }
         }
         public void Dispose()
