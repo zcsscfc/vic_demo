@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace ApiFramework
 {
-    public class AppHostHttpListenerBase : SelfHttpListenerBase
+    public class AppHostHttpListenerBase : SelfHttpListenerBase, IGetApiHandler
     {
         protected AppHostHttpListenerBase(params Assembly[] assembliesWithServices)
             : base(assembliesWithServices)
@@ -23,7 +23,7 @@ namespace ApiFramework
 
             var apiResponse = WrapApiResponse();
 
-            var handler = GetHandler();
+            var handler = GetApiHandler();
             handler.ProcessRequest(apiRequest, apiResponse);
             response.ContentType = apiResponse.ContentType;
 
@@ -32,11 +32,6 @@ namespace ApiFramework
             response.ContentType = apiResponse.ContentType;
             response.OutputStream.Write(buffer, 0, buffer.Length);
             response.OutputStream.Close();
-        }
-
-        private IApiHandler GetHandler()
-        {
-            return new RestHandler();
         }
 
         private IApiResponse WrapApiResponse()
@@ -61,6 +56,11 @@ namespace ApiFramework
                 ContentType = request.ContentType,
                 InputStream = request.InputStream
             };
+        }
+
+        public IApiHandler GetApiHandler()
+        {
+            return new RestHandler();
         }
     }
 }

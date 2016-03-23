@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 
 namespace ApiFramework
 {
-    public class WebHttpHandler : IHttpHandler
+    public class WebHttpHandler : IGetApiHandler,IHttpHandler
     {
         public bool IsReusable
         {
@@ -31,7 +31,7 @@ namespace ApiFramework
             IApiRequest apiRequest = WrapApiRequest(request);
             IApiResponse apiResponse = WrapApiResponse(response);
 
-            IApiHandler handler = GetHttpHandler();
+            IApiHandler handler = GetApiHandler();
             handler.ProcessRequest(apiRequest,apiResponse);
             response.ContentType = apiResponse.ContentType;
 
@@ -41,12 +41,6 @@ namespace ApiFramework
             response.OutputStream.Write(buffer, 0, buffer.Length);
             response.OutputStream.Close();
         }
-
-        private IApiHandler GetHttpHandler()
-        {
-            return new RestHandler();
-        }
-
         private IApiResponse WrapApiResponse(HttpResponse response)
         {
             return new ApiResponse();
@@ -69,6 +63,11 @@ namespace ApiFramework
                 ContentType = request.ContentType,
                 InputStream = request.InputStream
             };
+        }
+
+        public IApiHandler GetApiHandler()
+        {
+            return new RestHandler();
         }
     }
 }

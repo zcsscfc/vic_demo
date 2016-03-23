@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace ApiFramework
 {
-    public class RestHandler : IApiHandler, IHttpHandler
+    public class RestHandler : IApiHandler
     {
         public void ProcessRequest(IApiRequest request, IApiResponse response)
         {
@@ -31,27 +31,9 @@ namespace ApiFramework
             response.Content = _response;
             response.ContentType = "text/json";
         }
-
-        public bool IsReusable
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public void ProcessRequest(HttpContext context)
-        {
-            throw new NotImplementedException();
-        }
-
         private object GetParameter(Type paraType, IApiRequest request)
         {
             object para = null;
-
-            //NameValueCollection queryString = request.QueryString;
-            //if (queryString != null && queryString.Count > 0)
-            //{
-
-            //}
-
             var reader = new StreamReader(request.InputStream);
             var body = reader.ReadToEnd();
 
