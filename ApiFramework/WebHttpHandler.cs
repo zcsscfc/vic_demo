@@ -22,7 +22,6 @@ namespace ApiFramework
         {
             get { return false; }
         }
-
         public void ProcessRequest(HttpContext context)
         {
             HttpRequest request = context.Request;
