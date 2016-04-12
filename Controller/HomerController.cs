@@ -13,13 +13,13 @@ namespace Controller
         [RequestPath(Path = "/index", Method = HttpMethod.Get)]
         public Response Index()
         {
-            return new Response().Success();
+            return new Response().Success("hello world");
         }
 
         [RequestPath(Path = "/about")]
-        public Response About()
+        public Response About(Person person)
         {
-            return new Response().Success(new { Name="victor"});
+            return new Response().Success(new { Name = "victor" });
         }
     }
 }

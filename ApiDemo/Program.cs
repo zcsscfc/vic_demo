@@ -14,8 +14,8 @@ namespace ApiDemo
         {
             AppHost appHost = new AppHost(AssemblyUtility.GetServicesAssemblys());
             string urlBase = "http://localhost:1337/";
-            appHost.Start(urlBase);
-
+            appHost.Start(urlBase);     
+        
             Console.WriteLine(string.Format("listener started on {0}", urlBase));
             Console.ReadKey();
         }

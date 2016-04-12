@@ -13,7 +13,6 @@ namespace ApiDemo
         public AppHost(params Assembly[] assembliesWithServices)
             : base(assembliesWithServices)
         {
-
         }
     }
 }
