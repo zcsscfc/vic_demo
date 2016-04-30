@@ -21,29 +21,33 @@ namespace ShawdowSockTool
         {
             using (StreamReader reader = new StreamReader("serverFile.txt"))
             {
-                ServerModel servModel = new ServerModel();
-                servModel.strategy = null;
-                servModel.index = 16;
-                servModel.global = false;
-                servModel.enabled = true;
-                servModel.shareOverlan = true;
-                servModel.isDefault = false;
-                servModel.localPort = 1080;
-                servModel.pacUrl = null;
-                servModel.userOnlinePac = false;
-                servModel.configs = new List<Server>();
+                ServerModel servModel = new ServerModel
+                {
+                    strategy = null,
+                    index = 16,
+                    global = false,
+                    enabled = true,
+                    shareOverlan = true,
+                    isDefault = false,
+                    localPort = 1080,
+                    pacUrl = null,
+                    userOnlinePac = false,
+                    configs = new List<Server>()
+                };
                 string strLine;
                 while (!string.IsNullOrWhiteSpace(strLine = reader.ReadLine()))
                 {
                     string[] arrConfig = strLine.Split(new string[] { "\t" }, StringSplitOptions.RemoveEmptyEntries);
                     if (arrConfig.Length > 0)
                     {
-                        Server server = new Server();
-                        server.remarks = arrConfig[0] + arrConfig[1];
-                        server.method = arrConfig[2];
-                        server.server = arrConfig[3];
-                        server.password = "zcsscfc";
-                        server.server_port = 13015;
+                        Server server = new Server
+                        {
+                            remarks = arrConfig[0] + arrConfig[1],
+                            method = arrConfig[2],
+                            server = arrConfig[3],
+                            password = "zcsscfc",
+                            server_port = 13015
+                        };
                         servModel.configs.Add(server);
                     }
                 }
@@ -55,6 +59,17 @@ namespace ShawdowSockTool
                     writer.Write(json);
                 }
             }
+        }
+
+        static void Test()
+        {
+            Console.WriteLine("hello world");
+            Console.WriteLine("test");
+            Console.WriteLine("test");
+
+            Console.WriteLine("test");
+            Console.WriteLine("hello world");
+            
         }
 
         static void PingServer()
