@@ -12,8 +12,8 @@ namespace ShawdowSockTool
     {
         static void Main(string[] args)
         {
-            HandlConfig();
-            //PingServer();
+            //HandlConfig();
+            PingServer();
             Console.ReadKey();
         }
 
