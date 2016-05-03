@@ -40,6 +40,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "webapp", "http://localhost:
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearRedis", "ClearRedis\ClearRedis.csproj", "{AD36FD96-AD52-454B-BD56-38114DD7998A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,10 @@ Global
 		{D3926EF6-2618-4384-8B24-0F322A9B9320}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3926EF6-2618-4384-8B24-0F322A9B9320}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{D3926EF6-2618-4384-8B24-0F322A9B9320}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{AD36FD96-AD52-454B-BD56-38114DD7998A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD36FD96-AD52-454B-BD56-38114DD7998A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD36FD96-AD52-454B-BD56-38114DD7998A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD36FD96-AD52-454B-BD56-38114DD7998A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
