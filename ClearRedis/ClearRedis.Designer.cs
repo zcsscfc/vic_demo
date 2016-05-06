@@ -92,6 +92,7 @@
             this.Controls.Add(this.txtKey);
             this.MaximizeBox = false;
             this.Name = "ClearRedis";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ClearRedis";
             this.ResumeLayout(false);
             this.PerformLayout();

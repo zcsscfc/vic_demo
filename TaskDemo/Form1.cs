@@ -23,13 +23,12 @@ namespace TaskDemo
             Task.Run(() =>
             {
                 int sum = 0;
-                ShowValue method = () => { textBox1.Text = sum.ToString(); };
                 for (int i = 0; i < 10000; i++)
                 {
                     Thread.Sleep(1000);
                     sum += i;
-                    
-                    textBox1.Invoke(method,null);
+
+                    textBox1.Invoke((Action)delegate { textBox1.Text = sum.ToString(); }, null);
                 }
             });
         }

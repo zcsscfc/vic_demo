@@ -23,8 +23,16 @@ namespace ClearRedis.Common
             List<string> values = null;
             if (!string.IsNullOrWhiteSpace(key))
             {
-                ICacheProvider cache = CacheFactory.GetPorvider(_clusterName);
-                values = cache.GetAllItemsFromList(key);
+                try
+                {
+                    ICacheProvider cache = CacheFactory.GetPorvider(_clusterName);
+                    values = cache.GetAllItemsFromList(key);
+                }
+                catch (Exception e)
+                {
+                    return e.Message;
+                }
+
             }
             if (values != null && values.Count > 0)
             {
@@ -38,13 +46,21 @@ namespace ClearRedis.Common
             return string.Empty;
         }
 
-        public static void ClearValue(string key)
+        public static string ClearValue(string key)
         {
             if (!string.IsNullOrWhiteSpace(key))
             {
-                ICacheProvider cache = CacheFactory.GetPorvider(_clusterName);
-                cache.Remove(key);
+                try
+                {
+                    ICacheProvider cache = CacheFactory.GetPorvider(_clusterName);
+                    cache.Remove(key);
+                }
+                catch (Exception e)
+                {
+                    return e.Message;
+                }
             }
+            return string.Empty;
         }
     }
 }
