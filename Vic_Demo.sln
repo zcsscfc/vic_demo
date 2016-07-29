@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumDemo", "EnumDemo\EnumDemo.csproj", "{26625112-EEA0-4033-914F-6BD4C481AC1F}"
 EndProject
@@ -18,6 +18,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShawdowSockTool", "ShawdowSockTool\ShawdowSockTool.csproj", "{93401374-C081-4DBC-8041-4667D75DBC68}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskDemo", "TaskDemo\TaskDemo.csproj", "{C0A4FF53-18D2-4937-908B-9ED2FF7E98EC}"
+EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "webapp", "http://localhost:60391", "{D3926EF6-2618-4384-8B24-0F322A9B9320}"
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
@@ -42,6 +43,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "webapp", "http://localhost:
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearRedis", "ClearRedis\ClearRedis.csproj", "{AD36FD96-AD52-454B-BD56-38114DD7998A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{A144F0B8-9BB0-47D9-AC8B-C2F4CF7E1870}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +92,10 @@ Global
 		{AD36FD96-AD52-454B-BD56-38114DD7998A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD36FD96-AD52-454B-BD56-38114DD7998A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD36FD96-AD52-454B-BD56-38114DD7998A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A144F0B8-9BB0-47D9-AC8B-C2F4CF7E1870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A144F0B8-9BB0-47D9-AC8B-C2F4CF7E1870}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A144F0B8-9BB0-47D9-AC8B-C2F4CF7E1870}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A144F0B8-9BB0-47D9-AC8B-C2F4CF7E1870}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
