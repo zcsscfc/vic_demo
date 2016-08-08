@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ctrip.IFinance.CBU.Services.Core.Common.Utility">
+      <HintPath>..\..\..\workspace\Wallet_CBU\SystemAssemblies\Ctrip.IFinance.CBU.Services.Core.Common.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
