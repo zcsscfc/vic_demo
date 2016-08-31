@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner"
   dslVersion="1.0.0.0"
   Id="ad8e64ce-94fc-48e0-ae51-ffdcb09bbc2c"
   name="ApiModel" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -157,16 +157,37 @@
         <lifelines>
           <lifeline
             Id="e4fc35f1-7d05-41da-bba1-9aac0db657e0"
+            name="h5/native"
+            isActor="false"
+            lifelineDisplayName="h5/native" />
+          <lifeline
+            Id="f4af4f7e-3a8c-4f95-b260-31b7e9c3d295"
+            name="cbu"
+            isActor="false"
+            lifelineDisplayName="cbu" />
+          <lifeline
+            Id="fbca0ec1-4eab-44be-ac8c-8874aa90865a"
             name="Lifeline1"
             isActor="false"
             lifelineDisplayName="Lifeline1" />
           <lifeline
-            Id="f4af4f7e-3a8c-4f95-b260-31b7e9c3d295"
+            Id="1f6c4dc7-eb7b-4045-b005-47090fff6b0e"
             name="Lifeline2"
             isActor="false"
             lifelineDisplayName="Lifeline2" />
         </lifelines>
       </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="81f661cb-b6d1-4ed3-991a-f7e602d14f16"
+        name="Activity1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
