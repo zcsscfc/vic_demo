@@ -1,15 +1,13 @@
 ﻿using Ctrip.IFinance.CBU.Services.Core.Common.Security;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.IO;
+using System.Text;
 using System.Web;
 
 namespace Test
 {
-    class Victor
+    internal class Victor
     {
         public void Test(int i)
         {
@@ -23,15 +21,21 @@ namespace Test
             }
         }
     }
-    class Program
+
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Victor v = new Victor();
-            v.Test(15);
+            //var vaue = Convert.ToString(100, 16);
+            var list = new List<KeyValuePair<string, string>>();
+            list.Add(new KeyValuePair<string, string>("name", "victor"));
+            list.Add(new KeyValuePair<string, string>("name", "Phipip"));
+            list.Add(new KeyValuePair<string, string>("name", "victor"));
+            
+
+            Console.WriteLine(DateTime.Now.Date);
             Console.ReadKey();
         }
-
 
         private static string Sign()
         {
@@ -84,9 +88,6 @@ namespace Test
             Console.WriteLine(result);
             return result;
         }
-
-
-
 
         private static string GetContent()
         {

@@ -46,6 +46,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearRedis", "ClearRedis\Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{A144F0B8-9BB0-47D9-AC8B-C2F4CF7E1870}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IEnumerableDemo", "IEnumerableDemo\IEnumerableDemo.csproj", "{1546C9DD-E852-414F-8161-E003E3D2A6B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLRViaDemo", "CLRViaDemo\CLRViaDemo.csproj", "{190C010F-6910-4EAE-AF6C-ECE351CC858A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,6 +100,14 @@ Global
 		{A144F0B8-9BB0-47D9-AC8B-C2F4CF7E1870}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A144F0B8-9BB0-47D9-AC8B-C2F4CF7E1870}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A144F0B8-9BB0-47D9-AC8B-C2F4CF7E1870}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1546C9DD-E852-414F-8161-E003E3D2A6B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1546C9DD-E852-414F-8161-E003E3D2A6B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1546C9DD-E852-414F-8161-E003E3D2A6B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1546C9DD-E852-414F-8161-E003E3D2A6B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{190C010F-6910-4EAE-AF6C-ECE351CC858A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{190C010F-6910-4EAE-AF6C-ECE351CC858A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{190C010F-6910-4EAE-AF6C-ECE351CC858A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{190C010F-6910-4EAE-AF6C-ECE351CC858A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
